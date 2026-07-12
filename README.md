@@ -1,6 +1,14 @@
 # option_pricer
-Pricer for vanilla and Asian options
 
+This repository contains the implementation of the following pricers:
+
+- Vanilla call- and put-option pricer under a Black-Scholes-Merton scenario.
+
+- Vanilla call- and put-option pricer using Monte Carlo methods.
+
+- Arithmetically averaged call- and put-option pricer using Monte Carlo methods.
+
+The first pricer was also adapted to describe geometrically average call and put options. 
 
 ## Installation
 
@@ -50,7 +58,7 @@ def test_call_option():
         t=1
     )
     price = option.call()
-    
+
     fig, ax = plt.subplots() 
     ax.plot(option.ts, price)
     ax.set_title("Call Option Price vs Time")
@@ -58,3 +66,10 @@ def test_call_option():
     
     assert isinstance(price, np.ndarray) or isinstance(price, float)
 ```
+
+
+## Report 
+
+As part of the Quant Finance Summer 2026 cohort program at The Erdos Institute, 
+a report explaining motivations, implementation and examples is provided in 
+the respective folder. 
