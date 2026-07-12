@@ -2,10 +2,20 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
+import os, sys
+
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+    
+src_path = os.path.join(root_path, "src")
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+
 from helpers import *
 from option_pricer.vanilla import VanillaOptionBS
 from option_pricer.vanilla import VanillaOptionMC
-from option_pricer.average import ArithmeticOptionMC 
+from option_pricer.average import ArithmeticOptionMC
 
 # --- Page Configuration
 st.set_page_config(
