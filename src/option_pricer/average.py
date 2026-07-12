@@ -34,26 +34,26 @@ class ArithmeticOptionMC:
         return self.stock_path
 
     def call(self):
-            self.paths = self._generate_paths()
-            n_assets, n_times, _ = self.paths.shape
-            call_prices_grid = np.zeros((n_assets, n_times))
-            for t in range(n_times):
-                current_averages = np.mean(self.paths[:, :t+1, :], axis=1)
-                payoffs = np.maximum(current_averages - self.K, 0)
-                call_prices_grid[:, t] = np.mean(payoffs, axis=1)
-            remaining_times = self.t - self.time_space
-            remaining_times = np.maximum(remaining_times, self.tol)
-            discount_factors = np.exp(-self.r * remaining_times)
-            return call_prices_grid * discount_factors[np.newaxis, :]
+        self.paths = self._generate_paths()
+        n_assets, n_times, n_sims = self.paths.shape
+        cumsum_paths = np.cumsum(self.paths, axis=1)
+        time_indices = np.arange(1, n_times + 1)[np.newaxis, :, np.newaxis]
+        current_averages = cumsum_paths / time_indices
+        payoffs = np.maximum(current_averages - self.K, 0)
+        call_prices_grid = np.mean(payoffs, axis=2)
+        remaining_times = self.t - self.time_space
+        remaining_times = np.maximum(remaining_times, self.tol)
+        discount_factors = np.exp(-self.r * remaining_times)
+        return call_prices_grid * discount_factors[np.newaxis, :]
 
     def put(self):
         self.paths = self._generate_paths()
-        n_assets, n_times, _ = self.paths.shape
-        call_prices_grid = np.zeros((n_assets, n_times))
-        for t in range(n_times):
-            current_averages = np.mean(self.paths[:, :t+1, :], axis=1)
-            payoffs = np.maximum(self.K - current_averages, 0)
-            call_prices_grid[:, t] = np.mean(payoffs, axis=1)
+        n_assets, n_times, n_sims = self.paths.shape
+        cumsum_paths = np.cumsum(self.paths, axis=1)
+        time_indices = np.arange(1, n_times + 1)[np.newaxis, :, np.newaxis]
+        current_averages = cumsum_paths / time_indices
+        payoffs = np.maximum(self.K - current_averages, 0)
+        call_prices_grid = np.mean(payoffs, axis=2)
         remaining_times = self.t - self.time_space
         remaining_times = np.maximum(remaining_times, self.tol)
         discount_factors = np.exp(-self.r * remaining_times)

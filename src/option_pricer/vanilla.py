@@ -137,8 +137,6 @@ class VanillaOptionMC:
         # Restore original array
         self.S = original_S 
 
-        print(call_forward, call_backward)
-
         # Return the difference between forward and backwared
         return (call_forward - call_backward) / h
     
