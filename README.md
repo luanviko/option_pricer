@@ -6,6 +6,8 @@ https://mcoptionpricer.streamlit.app/
 
 See below how to run the report locally. 
 
+## Introduction
+
 This repository contains the implementation of the following pricers:
 
 - Vanilla call- and put-option pricer under a Black-Scholes-Merton scenario.
@@ -15,6 +17,9 @@ This repository contains the implementation of the following pricers:
 - Arithmetically averaged call- and put-option pricer using Monte Carlo methods.
 
 The first pricer was also adapted to describe geometrically average call and put options. 
+
+![Delta surface for arithmetically averaged call options using the Monte Carlo Pricer](plot_example.png)
+
 
 ## Installation
 
