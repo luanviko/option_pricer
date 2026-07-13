@@ -1,5 +1,11 @@
 # option_pricer
 
+The report/ interactive dashboard can be found in this link:
+
+https://mcoptionpricer.streamlit.app/
+
+See below how to run the report locally. 
+
 This repository contains the implementation of the following pricers:
 
 - Vanilla call- and put-option pricer under a Black-Scholes-Merton scenario.
@@ -67,9 +73,34 @@ def test_call_option():
     assert isinstance(price, np.ndarray) or isinstance(price, float)
 ```
 
+## Highly Recommended
+
+After sourcing the local environment, run the complete test suite:
+```bash
+python -m pytest -sv
+```
+
+This will generate the 3D surface plots for both vanilla BSM and MC pricers,
+and the arithmetically averaged pricer. 
+
+
 
 ## Report 
 
 As part of the Quant Finance Summer 2026 cohort program at The Erdos Institute, 
 a report explaining motivations, implementation and examples is provided in 
 the respective folder. 
+
+As mentioned above, this report can be found online in this link:
+
+https://mcoptionpricer.streamlit.app/
+
+However, should you run into any troubles, you can run it locally. For that,
+source the local environment then follow these steps:
+
+```bash
+mv ./report
+streamlit run app.py --server.runOnSave true --server.maxMessageSize 500
+```
+
+A web browser tab should pop right up, running the simulations on the backend. 
